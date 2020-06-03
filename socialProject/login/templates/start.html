@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} GPMS role {% endblock %}
+{% block content %} 
+{% load static %}
+
+<h1> GPMS 畢業專題管理系統 </h1>
+<h2> 請先選擇角色 </h2>
+
+<a href="login"><img src="{% static 'images/teacher.png' %}"></a><br>
+<a href="login"><img src="{% static 'images/graduate.png' %}"></a><br>
+<a href="login"><img src="{% static 'images/general.png' %}"></a><br>
+
+
+{% endblock %}
