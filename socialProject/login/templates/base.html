@@ -1,8 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPMS 畢業專題管理系統</title>
+    <link rel="icon" type="image/png" href="presentation.png" sizes="32x32" />
+    <link rel="stylesheet" href="{% static 'index.css' %}"/>
   </head>
   <body>
   	{% block content %}

@@ -6,15 +6,14 @@
 
 <h1> GPMS 畢業專題管理系統 </h1>
 
-<a href="/accounts/signup">註冊</a><br>
 
 {% if user.is_authenticated %}
+{{user.email}}已登入
 <a href="/accounts/logout">登出</a><br>
-{{user.username}}已登入
 
 {% else %}
-<a href="{% provider_login_url 'google' %}"> google登入 </a><br>
 請登入
+<a href="{% provider_login_url 'google' %}"> Google登入 </a><br>
 
 {% endif %}
 {% endblock %}
