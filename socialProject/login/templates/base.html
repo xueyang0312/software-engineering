@@ -1,13 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPMS 畢業專題管理系統</title>
-    <link rel="icon" type="image/png" href="presentation.png" sizes="32x32" />
-    <link rel="stylesheet" href="{% static 'index.css' %}"/>
-  </head>
+    <header id='title'>
+        <div class='project_label'>
+            <img class='project_image' src="{% static 'images/presentation.png' %}">
+            <div class="projectName">GPMS </div>
+        </div>        
+        <div clsss='project_title'>畢業專題管理系統</div>
+        <div id='status'>
+            <img id='status_index' class='status_image' src="{% static 'images/user.png' %}">
+            <div id='status_index' class="username">使用者</div>
+            <div id='status_index' class='identity'>身分</div>
+            <img id='status_index' class='status_image' src="{% static 'images/bell.png' %}">
+            <div id='status_index' class='account_status'>登入</div>
+        </div>
+        <link rel="icon" type="image/png" href="presentation.png" sizes="32x32" />
+        <link rel="stylesheet" href="{% static 'index.css' %}"/>             
+    </header>
   <body>
   	{% block content %}
     {% endblock %}
