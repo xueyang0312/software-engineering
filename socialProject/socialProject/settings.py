@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -39,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
-
-
+    'Graduate_projects',
     # all auth
     'allauth',
     'allauth.account',
@@ -116,13 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -156,3 +156,12 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.nuk.edu.tw'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'a1065527@mail.nuk.edu.tw'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'graduate_project_system_admin <a1065527@mail.nuk.edu.tw>'
