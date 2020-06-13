@@ -1,4 +1,4 @@
-Django==3.0.6
+Django==3.0.7
 django-allauth==0.42.0
 django-bootstrap3==12.1.0
 django-contrib-comments==1.9.2
