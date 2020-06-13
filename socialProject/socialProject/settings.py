@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
     'Graduate_projects',
+    'crispy_forms',
     # all auth
     'allauth',
     'allauth.account',
@@ -159,9 +160,9 @@ SOCIALACCOUNT_PROVIDERS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
   
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtp.nuk.edu.tw'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'a1065527@mail.nuk.edu.tw'
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'graduate_project_system_admin <a1065527@mail.nuk.edu.tw>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'graduateproject0857@gmail.com'
+EMAIL_HOST_PASSWORD = 'software0857'
+DEFAULT_FROM_EMAIL = '畢業專題管理系統管理員 <graduateproject0857@gmail.com>'
