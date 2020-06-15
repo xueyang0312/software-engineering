@@ -61,5 +61,6 @@ class EmailPage(admin.ModelAdmin):
 
     confirm_mail_send.short_description = 'Confirm Mail Send'
 
+admin.site.site_header="GPMS管理後台"
 admin.site.register(Email, EmailPage)
 admin.site.register(project,projectAdmin)
