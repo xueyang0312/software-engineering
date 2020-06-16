@@ -4,7 +4,10 @@ from django.db import models
 class project(models.Model):
     project_name = models.CharField(max_length=50,help_text="Please enter your project name")
     person_in_charge = models.CharField(max_length=50,help_text="Please enter your username")#專題負責人
+    advisor = models.CharField(max_length = 50,help_text="Please enter your instructor",default = "teacher")
     project_date = models.DateTimeField('最後修改日期',auto_now=True)
+    #確認專題檔案是否上傳，預設值為false
+    upload = models.BooleanField(default=False)
     #新增file upload
     
 class Email(models.Model):
