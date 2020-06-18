@@ -144,7 +144,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = '/mail'
+#這裡我先測試直接導到mail，之後改成看身分登入
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
