@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from login import views
 
+# 各個subsystem中的url都在各自的urls.py，這裡只負責include
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login,name="login"),
+    path('login/', include('login.urls')),
     #path('index/', views.index,name="index"),#測試用之後註解拿掉
     path('mail/',  views.mail,name="mail"),
     path('',views.start,name="start"),

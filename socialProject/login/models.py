@@ -1,3 +1,21 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import User, UserManager
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+# addtional profile about users 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    identity = models.CharField(max_length=20, blank=True)
+    objects = UserManager()
 
+@receiver(post_save, sender=User)
+def _create_user_profile(sender,instance, created, **kwargs):
+    if created:
+        print("{} profile created".format(instance.username))
+        Profile.objects.created(user=instance)
+    
+@receiver(post_save, sender=User)
+def _save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+        
+    
