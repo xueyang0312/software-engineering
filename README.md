@@ -6,8 +6,6 @@ GPMS(畢業專題管理系統)
 3. pip install -r requirements.txt
 4. cd socialProject
 5. python manage.py runserver
-
-載檔案前看這裡
 1. html都放各個module的templates裡面
 2. js, css, 圖片放在static裡
 3. html裡連結圖片和js,css方法如下:
