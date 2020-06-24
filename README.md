@@ -8,11 +8,4 @@ GPMS(畢業專題管理系統)
 5. python manage.py runserver
 1. html都放各個module的templates裡面
 2. js, css, 圖片放在static裡
-3. html裡連結圖片和js,css方法如下:
-   {% load static %}
-   css:
-    <link rel="stylesheet" href="{% static % 'yourcssname' %}/>
-   js:
-    <script src="{% static 'yourjsname' %}" defer></script>
-   圖片:
-    <link rel="icon" type="image/png" href="{% static 'images/yourimagename' %}" sizes="32x32" />
+3. html裡連結圖片和js,css方法如下(以css為例，就是路徑改成這樣寫):{% load static %} <link rel="stylesheet" href="{% static % 'yourcssname' %}/>
