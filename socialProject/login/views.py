@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
+from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from socialProject.settings import EMAIL_HOST_USER
 from .models import Profile
 
@@ -28,7 +30,18 @@ def login(request, identity):
     if identity == "callback":
         idt = request.session['identity']
         u_id = request.session['_auth_user_id']
-        Profile.objects.create(user=User.objects.get(id=u_id), identity=idt)
+        # 若沒有Profile指向u_id，則建立一個Profile
+        try:
+            Profile.objects.get(user_id=u_id)
+        except ObjectDoesNotExist:
+            Profile.objects.create(user=User.objects.get(id=u_id), identity=idt)
+
+        if idt == "student": # 轉到學生頁面
+            return HttpResponseRedirect(reverse('s_index'))
+        elif idt == "teacher": # 轉到老師頁面
+            return HttpResponseRedirect(reverse('t_index'))
+        else: # 轉到訪客頁面
+            return HttpResponseRedirect(reverse('g_index'))
     identity = identity
     request.session['identity'] = identity
     return render(request, 'login.html', {'identity':identity})

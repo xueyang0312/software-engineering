@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -39,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'login.apps.LoginConfig',
     'Graduate_projects',
+    'advisor',
+
+    'simpleui',
     'crispy_forms',
     # all auth
     'allauth',

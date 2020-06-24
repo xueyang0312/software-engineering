@@ -20,9 +20,10 @@ from login import views
 # 各個subsystem中的url都在各自的urls.py，這裡只負責include
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.start,name="start"),
     path('login/', include('login.urls')),
+    path('advisor/', include('advisor.urls')),
     #path('index/', views.index,name="index"),#測試用之後註解拿掉
     path('mail/',  views.mail,name="mail"),
-    path('',views.start,name="start"),
     path('accounts/', include('allauth.urls')),
 ]
