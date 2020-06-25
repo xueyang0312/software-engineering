@@ -1,0 +1,225 @@
+body{
+    margin:0;   
+    background-color: #181818;
+    color: white;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    
+}
+ul {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+#title{
+    /* background-color: #212121; */
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 40px;
+    margin-top: 20px;
+}
+.project_label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 8%;
+    justify-content: center;
+}
+.project_title{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    font-size: 50px;
+    margin-left: 5%;
+
+
+}
+.roledisplay{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 250px;
+
+}
+.roledisplay a{
+    margin: 100px;
+    color: white;
+    text-decoration: none;
+}
+.roledisplay img {
+    /* margin: 100px; */
+    width: 200px;
+    height: 200px;
+}
+
+#status{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 2%;
+    width: 15%;
+    text-decoration: none;
+}
+#status a{
+    text-decoration: none;
+    color: white;
+}
+.project_image{
+    height:50%;
+    background-size: cover;
+}
+.projectName{
+    margin-left: 7%;
+    
+}
+
+
+#status_index{    
+    margin-right: 5%;    
+}
+.status_image{
+    height:50%;
+    background-size: cover;
+}
+#directory{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    background-color: rgb(212, 0, 255);
+    height: 40px;
+    margin-top: 20px;
+    align-items: center;
+    
+}
+#prfile{
+    display: none;
+}
+
+#profile{    
+    display: flex;
+    flex-direction: column;
+    /* align-content: center; */
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 3%;
+    border-radius: 5%;
+    border-style: solid;
+    /* background-color: aqua; */
+    height:500px;
+    
+}
+
+.profile-title{
+    font-size:200%;
+    text-align: center;
+    /* background-color: burlywood; */
+    border-bottom-style: solid;
+}
+.profile-content{
+    display: flex;
+    /* justify-content: space-between; */
+    /* background-color: blueviolet; */
+
+}
+.profile-img-flex{
+    width: 20%;
+    /* background-color: aquamarine; */
+    padding: 5%;
+}
+.profile-text-flex{
+    /* display: flex; */
+    /* width: 40%; */
+    flex-direction: column;
+    /* background-color: crimson; */
+    padding: 5%;
+    margin-left: 5%;
+}
+.profile_image{
+    height: 100px;
+    /* width: 100%; */
+    border-style: solid;
+    padding: 2px;
+
+}
+.store-button{
+    text-align: end;
+    margin-top: 10%;
+}
+.profile-index{
+    margin-top: 3%;
+}
+.profile-username{
+    width: 40%;
+}
+.usergrade{
+    width: 20%;
+}
+.usermail{
+    width: 80%;
+
+}
+.userline{
+    width: 60%;
+
+}
+.upload-img{
+    width: 100px;
+}
+
+#status_index:hover{
+    color: yellow;
+    
+}
+.table_index{
+    width: 10%;    
+    text-align: center;
+    height: 100%;
+    line-height: 40px;
+    
+    z-index: 0;
+}
+.table_index:hover{ 
+    background-color: blueviolet;
+    
+    
+}
+.table_index a{
+    text-decoration: none !important;
+    color: white;
+}
+/*     ----------------------------- */
+.table_index ul {
+    display: none;
+}
+
+
+.table_index li:hover > ul { /* 滑鼠滑入展開次選單*/
+    display: block;
+}
+.table_index li a{ /* 滑鼠滑入選單*/
+    text-decoration: none;
+    color: white;
+}
+.table_index ul li { /* 滑鼠滑入展開的次選單*/
+    text-decoration: none;
+    color: white;
+    background-color:  rgb(212, 0, 255);
+    width: 120%;
+    border-style: solid;
+    border-width: 1px;
+    
+    border-color: blueviolet;
+
+}
+ul.table_index ul :hover{   
+    text-decoration: none;
+    color: white;
+    background-color:blueviolet;
+    border-color: rgb(212, 0, 255);
+    
+
+}

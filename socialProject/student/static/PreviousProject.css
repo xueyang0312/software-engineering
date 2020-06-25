@@ -1,0 +1,272 @@
+#Previous-project{
+    display: flex;
+    
+}
+.Previous-pjlist{
+    /* background-color: gray; */
+    background-color: black;
+    width: 15%;
+    height: 600px;
+    color: azure;
+    text-align: center;
+    
+    
+    
+}
+.year a{
+    text-decoration: none !important; 
+    height:40px;
+    text-align: center;
+    line-height: 40px;
+}
+.year{
+    
+    /* border-width: 5px; */
+    background-color: #282828;
+    /* border-style: inset; */
+}
+
+.grouplist{
+    display: block;
+    width: 100%;
+    color: azure !important;
+    background-color: black;
+    
+
+}
+.group{
+    height:40px;
+    text-align: center;
+    line-height: 40px;
+    
+}
+.grouplist :hover{   /* 碰到第X組觸發*/
+    background-color: #282828 !important; 
+    
+}
+#Previous-pjshow-block{
+    height: 600px;
+    width: 85%;
+    
+    /* background-color: beige; */
+}
+.pj-title{
+    text-align: center;    
+    font-size: 20px;
+    padding: 5px;
+    height: 30px;
+    border-bottom: 2px rgb(15, 12, 12) solid;
+}
+
+.Previous-pjshow{    
+    height: 560px;
+    width: 100%;
+    overflow: auto;
+}
+
+.pj-content-block{
+    background-color: bisque;
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 80%;    
+    background-color: rgb(15, 12, 12);
+    padding: 1%;
+}
+.pj-content{
+    margin-top: 1%;
+    /* border-bottom: 2px whitesmoke solid; */
+    
+}
+#pj-text{
+    width: 100%;
+    height: 1000px;
+    background-color: rgb(15, 12, 12);
+    
+}
+
+#message_board{
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.mes_title{
+    border-bottom: 2px white solid;
+    padding: 2px;
+    width: 90%;
+    text-align: start;
+}
+.mes_bar{
+    background-color:#181818;
+    width: 80%;
+    margin: 0.5%;
+    /* border-bottom: 2px white solid; */
+}
+.mes_name{
+    margin-left: 2%;
+}
+.mes_text{
+    margin-left: 12%;
+}
+.mes_date{
+    text-align: end;
+    margin-right: 5%;
+    font-size: smaller;
+    margin-bottom: 5px;
+}
+#mes_text{
+    margin-left: 10%;
+}
+/* ---------------------應屆專題 */
+#current_pj{
+    display: flex;
+}
+.cur_pj_outline{
+    margin-left: 5%;
+    width: 15%;
+    height: 500px;
+    margin-top: 50px;
+    /* background-color: #282828; */
+}
+#cur_group_block{
+    overflow-y: scroll;
+    height: 600px;
+    width: 80%;
+    /* background-color: navy; */
+    
+    
+}
+.cur_group{
+    height: 490px;
+    width: 80%;
+    margin: 80px;
+    
+    background-color: #282828;
+    padding-top: 0.2%; 
+    display: flex;
+    
+}
+
+
+.outline_group_index{
+    margin-top: 2%;
+    margin-left: 5%;
+    /* background-color: darkslategrey; */
+    line-height: 40px;
+    color: ghostwhite;
+}
+
+#group_No{
+    display: flex;
+}
+#pj_name{
+    text-align: center;    
+    margin-left: -50px;
+    font-weight: bold;
+    color: white;
+}
+#group_teacher{
+    text-align: center;
+    margin-left: -50px;
+    font-weight: bold;
+    color: white;
+}
+#group_member{
+    /* margin-left: 40px; */
+    /* width: 60%; */
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    
+}
+
+
+#progress_bar{
+    background-color: azure;
+    height: 10px;
+    width: 50%;    
+}
+#progress_value{
+    text-align: end;
+}
+/* 上船資料 */
+#upload_block{
+    height: 600px;
+    width: 100%;
+    display: flex;
+    overflow: auto;
+}
+.uploadfile_block{
+    
+    /* background-color: black; */
+    height: 200px;
+    width: 20%;
+    margin: 5%;
+    margin-top: 10%;
+}
+
+.uploadtext_block{
+    margin-top: 5%;
+    background-color: black;
+    
+    height: 1000px;
+    width: 60%;
+}
+.uploadtitle{
+    /* background-color: black; */
+    border: 2px white solid;
+    line-height: 40px;
+    width: 40%;
+    padding-left: 5px;
+}
+.uploadindex{
+    margin-top: -2px;
+    border: 2px white solid;
+    height: 90%;
+    width: 90%;
+    padding: 10px;
+}
+.uploadindex input{
+    /* background-color: black; */
+    /* width: 100%; */
+    align-items: end;
+}
+.uploadindex div{
+    margin-top: 10px;
+}
+.fileblock{
+    margin-top: 10px;
+   
+    text-align: center;
+    /* display: none; */
+    margin-bottom: 10px;
+
+}
+.showfile{
+    
+    margin-top: 20px;
+    margin-left: 20%;
+    
+}
+
+.showtime{
+    /* text-align: end; */
+    height: 10%;
+    /* display: none; */
+    display: flex;
+    margin-bottom: 10px;
+    font-size: small;
+}
+.but_block{
+    margin-top: 10%;
+    /* margin-left: 5%; */
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    
+}
+
+.uploadbut{
+    margin-left: 200px;
+}
