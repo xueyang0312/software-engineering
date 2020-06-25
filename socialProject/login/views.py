@@ -17,28 +17,25 @@ def send_meeting():
     to_email = ['jeak831130015@gmail.com']#後面郵件可以用recepient@mail.nuk.edu.tw，一定要用[]，我也不知道不然會噴錯
     send_mail(subject,message,EMAIL_HOST_USER,to_email,fail_silently=False)
 
-def callback(request):
-    print("in callback")
-    print(request.session)
-    if request.user.is_authenticated:
-        print(request.user.email)
-    return HttpResponse("in callback url")
-
 # Create your views here.
 def login(request, identity):
     # callback 為重新導向網址
     if identity == "callback":
+        print("in callback")
         idt = request.session['identity']
+        print(idt)
         u_id = request.session['_auth_user_id']
         # 若沒有Profile指向u_id，則建立一個Profile
         try:
-            Profile.objects.get(user_id=u_id)
+            p = Profile.objects.filter(user_id=u_id)
+            if identity != p[0].identity:
+                p.update(identity=idt)
         except ObjectDoesNotExist:
             Profile.objects.create(user=User.objects.get(id=u_id), identity=idt)
-
         if idt == "student": # 轉到學生頁面
             return HttpResponseRedirect(reverse('s_index'))
         elif idt == "teacher": # 轉到老師頁面
+            print("Is teacher")
             return HttpResponseRedirect(reverse('t_index'))
         else: # 轉到訪客頁面
             return HttpResponseRedirect(reverse('g_index'))

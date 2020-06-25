@@ -6,6 +6,9 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     identity = models.CharField(max_length=20, blank=True)
+    usergrade = models.IntegerField(blank=True, null=True)
+    userphone = models.CharField(max_length=20, blank=True)
+    userline = models.CharField(max_length=20, blank=True)
     objects = UserManager()
 
 @receiver(post_save, sender=User)

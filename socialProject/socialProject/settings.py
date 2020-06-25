@@ -25,7 +25,7 @@ SECRET_KEY = 'j*$8@)3nl&v&7k%wuf!k=v*urp^^+mt2ufo73&l-vutgsj_m!3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'Graduate_projects',
     'advisor',
+    'student',
 
     'simpleui',
     'crispy_forms',

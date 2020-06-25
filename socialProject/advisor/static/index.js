@@ -1,3 +1,4 @@
+
 function check(status) {
     console.log(status);
     if  (status == 'profile'){
@@ -21,9 +22,9 @@ function click_dir(choice){
         document.getElementById('current_pj').style.display = "flex"; //hide 歷屆專題資料
         
     }
-    if (choice=='upload_pj'){
-        hideAll();
+    if (choice=='calendar'){
         document.getElementById('upload_block').style.display = "flex"; //hide 歷屆專題資料
+        document.location.href = "./calendar";
     }
     if (choice=='conne_teacher'){
         hideAll();
@@ -82,6 +83,25 @@ function choice_Y(status) { //選擇年分
     reductionGroupColor();//將全部.group 背景都還原變成黑色
     // document.getElementById('show').style.backgroundColor='blueviolet';
     document.getElementById('Previous-project').style.display='flex';
+    // 利用ajax獲取資料庫資料
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: {'year': choiceYear + '級', 'group': 1},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            console.log("got json response");
+            console.log(response);
+            $('.pj-title').text(response["project_name"]);
+            $('#pj-teacher').text("• 指導教授 : " + response["advisor"]);
+            $('#pj-members').text("• 組員 : " + response["members"]);
+            $('#pj-text').text("• 內容 : " + response["content"]);
+        }
+    });
 }
 
 function choice_G(status) {  //選擇組別
@@ -93,6 +113,24 @@ function choice_G(status) {  //選擇組別
     var group = 'group'+status;     
     document.getElementById(group).style.backgroundColor='#282828';
     document.getElementById('Previous-project').style.display='flex';
+
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: {'year': choiceYear + '級', 'group': parseInt(choiceGroup, 10)},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            console.log("got json response");
+            $('.pj-title').text(response["project_name"]);
+            $('#pj-teacher').text("• 指導教授 : " + response["advisor"]);
+            $('#pj-members').text("• 組員 : " + response["members"]);
+            $('#pj-text').text("• 內容 : " + response["content"]);
+        }
+    });
 }
 
 function reductionGroupColor(){       //將全部.group 背景都還原變成黑色
@@ -194,4 +232,5 @@ function createNewMessage(text, ID){
     document.getElementById(mesID).appendChild(newElement_text);
     document.getElementById(mesID).appendChild(newElement_date);
 }
+
 
