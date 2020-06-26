@@ -37,8 +37,18 @@
         </ul>
         <div class='table_index' onclick="click_dir(this.id)" id='cur_pj'><a href="#">應屆專題</a></div>
         <div class='table_index' onclick="click_dir(this.id)" id='calendar'><a href="#">師給揪</a></div>
-        <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聯絡老師</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聊天室</a></div>
     </div>
+    <form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="submit">
+    </form>
    
 
 
@@ -51,9 +61,9 @@
                 <input type="file" class = 'upload-img' onchange="readURL(this)" targetID="p_img" accept="image/gif, image/jpeg, image/png"/ value="upload" style="overflow: hidden">
             </div>
 
-            <form class='profile-text-flex' id='profile-form'>
+            <form action="" class='profile-text-flex' id='profile-form'>
                 <div class='profile-index'>
-                    姓名 : <input type="text" name="UserName" class='profile-username' value={{ u_name }}>
+                    姓名 : {{ u_name }}
                 </div>
                 <div class='profile-index'>
                     手機 : <input type="text" name="Userphone" class='userline' value={{ u_phone }}>
@@ -62,7 +72,7 @@
                     LINE-ID : <input type="text" name="UserLine" class='userline' value={{ u_line }}>
                 </div>
                 <div class='profile-index'>
-                    聯絡e-mail : <input type="text" name="UserMail" class='usermail' value={{ u_mail }}>
+                    聯絡e-mail : <input type="email" name="UserMail" class='usermail' placeholder={{ u_mail }}>
                 </div>
                 
                 <div class='store-button'>
