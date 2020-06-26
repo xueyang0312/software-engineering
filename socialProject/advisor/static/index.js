@@ -56,17 +56,16 @@ var choiceGroup = '1'
 ///.........
 //讀取使用者修改的資料
 function store(){
-    console.log('store');    
-    formElement = document.getElementById("profile-form");
-    username = formElement[0].value;
-    usermail = formElement[1].value;
-    var userphone = formElement[2].value;
-    var userline = formElement[3].value;
-    console.log(formElement[0].value);
-    console.log(formElement[1].value);
-    console.log(formElement[2].value);
-    console.log(formElement[3].value);
-
+//     console.log('store');    
+//     formElement = document.getElementById("profile-form");
+//     username = formElement[0].value;
+//     usermail = formElement[1].value;
+//     var userphone = formElement[2].value;
+//     var userline = formElement[3].value;
+//     console.log(formElement[0].value);
+//     console.log(formElement[1].value);
+//     console.log(formElement[2].value);
+//     console.log(formElement[3].value);
     var div = document.getElementById('profile'); 
     var attr = document.createAttribute('class'); 
     attr.value = 'cssClass1'; 

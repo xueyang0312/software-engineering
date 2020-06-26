@@ -41,7 +41,7 @@ def index(request):
                 group=request.POST.get('group')
             ).first()
         return JsonResponse(serializePreProject(pj))
-
+    # 更新使用者資料
     elif request.method == "POST":
         form = ProfileForm(request.POST)
         if form.is_valid():
