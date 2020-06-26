@@ -23,6 +23,7 @@ urlpatterns = [
     path('',views.start,name="start"),
     path('login/', include('login.urls')),
     path('advisor/', include('advisor.urls')),
+    path('student/', include('student.urls')),
     #path('index/', views.index,name="index"),#測試用之後註解拿掉
     path('mail/',  views.mail,name="mail"),
     path('accounts/', include('allauth.urls')),

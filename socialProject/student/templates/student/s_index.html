@@ -8,12 +8,33 @@
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPMS 畢業專題管理系統</title>
-    <link rel="icon" type="image/png" href="{% static 'images/presentation.png' %}" sizes="32x32" />
-    <link rel="stylesheet" href="{% static 's_index.css' %}"/>
-    <link rel="stylesheet" href="{% static 'PreviousProject.css' %}"/>
-    <script src="{% static 'index.js' %}" defer></script>
+    <link rel="icon" type="image/png" href="{% static 'student/images/presentation.png' %}" sizes="32x32" />
+    <link rel="stylesheet" href="{% static 'student/s_index.css' %}"/>
+    <link rel="stylesheet" href="{% static 'student/PreviousProject.css' %}"/>
+    <script src="{% static 'jquery-3.5.1.js'%}"></script>
+    <script src="{% static 'student/index.js' %}" defer></script>
+    <script>
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+    });
+    </script>
 </head>
 <body>
+     <header id='title'>
+        <div class='project_label'>
+            <img class='project_image' src="{% static 'student/images/presentation.png' %}">
+            <div class="projectName">GPMS </div>
+        </div>        
+        <div clsss='project_title'>畢業專題管理系統</div>
+        <div id='status'>
+            <img id='status_index' class='status_image' onclick="check('profile')" src="{% static 'student/images/user.png' %}">
+            <a href="#" id='status_index' class="username" onclick="check('profile')">{{ u_name }}</a>
+            <a  href="#" id='status_index' class='identity' onclick="check('student')">{{ idt }}</a>
+            <img href="#" id='status_index' class='status_image' onclick="check('bell')" src="{% static 'student/images/bell.png' %}">
+            <a href="#" id='status_index' class='account_status' onclick="check('logout')">登出</a>
+        </div>             
+    </header>
+
     <div id='directory'>
         <ul class='table_index' onclick="click_dir(this.id)" id='show'>
             <li><a href="#">歷屆專題</a>
@@ -30,9 +51,19 @@
             </li> 
         </ul>
         <div class='table_index' onclick="click_dir(this.id)" id='cur_pj'><a href="#">應屆專題</a></div>
-        <div class='table_index' onclick="click_dir(this.id)" id='upload_pj'><a href="#">上傳資料</a></div>
-        <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聯絡老師</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='calendar'><a href="#">上傳檔案</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聊天室</a></div>
     </div>
+    <form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="submit">
+    </form>
    
 
 
@@ -41,25 +72,22 @@
         <div class='profile-content'>
             <div class='profile-img-flex'>
                 <div>圖片 : </div>
-                <img class='profile_image' id='p_img' src="{% static 'images/user.png' %}">
+                <img class='profile_image' id='p_img' src="{% static 'student/images/user.png' %}">
                 <input type="file" class = 'upload-img' onchange="readURL(this)" targetID="p_img" accept="image/gif, image/jpeg, image/png"/ value="upload" style="overflow: hidden">
             </div>
 
-            <form class='profile-text-flex' id='profile-form'>
+            <form action="" method="POST" class='profile-text-flex' id='profile-form'>
                 <div class='profile-index'>
-                    姓名 : <input type="text" name="UserName" class='profile-username'>
+                    姓名 : {{ u_name }}
                 </div>
                 <div class='profile-index'>
-                    級別 : <input type="text" name="UserGrade" class='usergrade' value ='110'>
+                    手機 : <input type="text" name="Userphone" class='userline' value={{ u_phone }}>
                 </div>
                 <div class='profile-index'>
-                    手機 : <input type="text" name="Userphone" class='userline'>
+                    LINE-ID : <input type="text" name="UserLine" class='userline' value={{ u_line }}>
                 </div>
                 <div class='profile-index'>
-                    LINE-ID : <input type="text" name="UserLine" class='userline'>
-                </div>
-                <div class='profile-index'>
-                    聯絡e-mail : <input type="text" name="UserMail" class='usermail'>
+                    聯絡e-mail : <input type="email" name="UserMail" class='usermail' placeholder={{ u_mail }}>
                 </div>
                 
                 <div class='store-button'>
@@ -84,7 +112,7 @@
                 <div class='grouplist'>
 
                     <div class='group' onclick="choice_G('1')" id='group1'>
-                        <a href="#" style="color:azure;">一. 123選股好簡單</a>
+                        <a href="#" style="color:azure;">第一組</a>
                     </div>
                     <div class='group' onclick="choice_G('2')" id='group2'>
                         <a href="#" style="color:azure;">第二組</a>
@@ -114,12 +142,36 @@
         <!-- 專題內文 -->
         <div id='Previous-pjshow-block'>
 
-        <div class='pj-title'>123選股好簡單</div>
+        <div class='pj-title'></div>
         <div class='Previous-pjshow'>        
             <div class='pj-content-block'>
-                    <div class='pj-content' id='pj-teacher'>• 指導教授 : 垃圾BR</div>
-                    <div class='pj-content' id='pj-members'>• 組員 : 翁晟洋 賴世倫 劉育瑋 王原成</div>
-                    <div class='pj-content' id='pj-text'>• 內容 : </div>
+                
+                    <div class='pj-content' id='pj-teacher'></div>
+                    <div class='pj-content' id='pj-members'></div>
+                    <div class='pj-content' id='pj-text'></div>
+
+                    <div id='message_board'>
+                            <div class='mes_title'>留言板:</div>
+                            <div class='mes_bar'>
+                                <a class='mes_name'>洋洋羊得意</a>
+                                <div class='mes_text'>你好棒</div>
+                                <div class='mes_date'>2020-6-23 15:20</div>
+                            </div>
+
+                            <div class='mes_bar'>
+                                <a class='mes_name'>洋洋羊得意</a>
+                                <div class='mes_text'>你好棒</div>
+                                <div class='mes_date'>2020-6-23 15:20</div>
+                            </div>
+
+                            <div class='mes_bar'>
+                                <a class='mes_name'>洋洋羊得意</a>
+                                <div class='mes_text'>你好棒</div>
+                                <div class='mes_date'>2020-6-23 15:20</div>
+                            </div>
+                    </div>
+                        <textarea class='textinput' id='mes_text' cols="112" rows="4">留言...</textarea>
+                        <input id='mesbut' type="button" value="送出" onclick="sendmessage()"/>
             </div>            
         </div>
         </div>
@@ -184,6 +236,7 @@
             專題資料編輯
         </div>
     </div>
+   
     
 </body>
 </html>

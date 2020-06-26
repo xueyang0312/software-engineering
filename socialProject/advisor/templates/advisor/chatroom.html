@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %} <!-- 載入靜態檔案 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'chatroom.css' %}">
+    <script src="{% static 'jquery-3.5.1.js' %}"></script>
+    <script src="{% static 'chatroom.js' %}" defer></script>
+    <script>
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+    });
+    </script>
+    <title>GPMS {{ group }}</title>
+</head>
+<body>
+    <a href="{% url 't_index' %}" id="returnButton">⬅︎</a>
+    <div id="flex_container">
+        <h1 id="roomTitle">Welcome To Chat Room</h1>
+    <div id="chatArea">
+        <div class="left"><img src="{% static 'images/star.png' %}" width="250px" height="250px"></div>
+        <div id="chat_space"></div>
+        <div class="right"><img src="{% static 'images/star.png' %}" width="250px" height="250px"></div>
+    </div>
+    <div id="form">
+        <form action="" method = "POST">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+            <label for="sentence"><span id="user_name">{{ user_name }}</span>: </label>
+            {{ form.sentence }}
+            <input type="submit" value="送出">
+        </form>
+    </div>
+</div>
+</body>
+</html>

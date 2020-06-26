@@ -26,8 +26,10 @@ function click_dir(choice){
         document.getElementById('upload_block').style.display = "flex"; //hide 歷屆專題資料
         document.location.href = "./calendar";
     }
+    // 導向聊天室頁面
     if (choice=='conne_teacher'){
         hideAll();
+        document.location.href = "./chat";
         
     }
 }

@@ -20,6 +20,21 @@
     </script>
 </head>
 <body>
+     <header id='title'>
+        <div class='project_label'>
+            <img class='project_image' src="{% static 'images/presentation.png' %}">
+            <div class="projectName">GPMS </div>
+        </div>        
+        <div clsss='project_title'>畢業專題管理系統</div>
+        <div id='status'>
+            <img id='status_index' class='status_image' onclick="check('profile')" src="{% static 'images/t_user.png' %}">
+            <a href="#" id='status_index' class="username" onclick="check('profile')">{{ u_name }}</a>
+            <a  href="#" id='status_index' class='identity' onclick="check('student')">{{ idt }}</a>
+            <img href="#" id='status_index' class='status_image' onclick="check('bell')" src="{% static 'images/t_bell.png' %}">
+            <a href="#" id='status_index' class='account_status' onclick="check('logout')">登出</a>
+        </div>             
+    </header>
+
     <div id='directory'>
         <ul class='table_index' onclick="click_dir(this.id)" id='show'>
             <li><a href="#">歷屆專題</a>

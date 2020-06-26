@@ -1,0 +1,84 @@
+#flex_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#returnButton{
+    text-decoration: none;
+    font-size:30px;
+}
+
+#roomTitle{
+    color: black;
+    font-size:50px;
+    font-family: fantasy;
+    margin:15px;
+}
+
+#chatArea{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.left{
+    width:15%;
+}
+
+.right{
+    width:15%;
+}
+
+#chat_space{
+    height:480px;
+    width: 50%;
+    background-color:rgb(173, 221, 238);
+    overflow: scroll;
+    overflow-x: hidden;
+    border-style: double;
+    border-color: black;
+    /* opacity: 0.1; */
+}
+
+.self_message{
+    margin-right: 20px;
+    font-size: 20px;
+    font-family:monospace;
+    text-align: right;
+}
+
+.other_message{
+    margin-left: 20px;
+    font-size: 20px;
+    font-family:monospace;
+    text-align: left;
+}
+
+.word{
+    font-size:20px;
+}
+
+.mes_bar{
+    background-color:#181818;
+    width: 80%;
+    margin: 0.5%;
+    /* border-bottom: 2px white solid; */
+}
+.mes_name{
+    color: white;
+    margin-left: 2%;
+}
+.mes_text{
+    color: white;
+    margin-left: 12%;
+}
+.mes_date{
+    color: white;
+    text-align: end;
+    margin-right: 5%;
+    font-size: smaller;
+    margin-bottom: 5px;
+}

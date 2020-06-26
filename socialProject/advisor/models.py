@@ -12,7 +12,7 @@ class PreProject(models.Model):
     members = models.CharField(max_length=40, null=False)
 
 class Record(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=30, null=False)
     sentence = models.CharField(max_length=100)
     time = models.DateTimeField(default=datetime.now)
-    group_id = models.IntegerField(default=0)
+    group = models.IntegerField(default=0)

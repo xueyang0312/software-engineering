@@ -39,21 +39,20 @@ def login(request, identity):
             return HttpResponseRedirect(reverse('t_index'))
         else: # 轉到訪客頁面
             return HttpResponseRedirect(reverse('g_index'))
-    identity = identity
     request.session['identity'] = identity
-    return render(request, 'login.html', {'identity':identity})
+    return render(request, 'login/login.html', {'identity':identity})
 
 def start(request):
     identity = "身份"
-    return render(request,'start.html', {'identity':identity})
+    return render(request,'login/start.html', {'identity':identity})
 
 #登入後才能跳到index.html
 @login_required
 def index(request):
-    return render(request,'index.html')
+    return render(request,'login/index.html')
 
 @login_required
 def mail(request):
     if request.method == "POST":
         send_meeting()
-    return render(request,'sendmail.html')
+    return render(request,'login/sendmail.html')
