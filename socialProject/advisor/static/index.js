@@ -150,7 +150,7 @@ function hideAll(){
     document.getElementById('profile').style.display = "none";  //hide 個人資料
     document.getElementById('Previous-project').style.display = "none"; //hide 歷屆專題資料
     document.getElementById('current_pj').style.display = "none"; //hide 歷屆專題資料
-    document.getElementById('upload_block').style.display = "none"; //hide 歷屆專題資料
+    // document.getElementById('upload_block').style.display = "none"; //hide 歷屆專題資料
 }
 function gettime(){
     var t = new Date();
@@ -230,6 +230,31 @@ function createNewMessage(text, ID){
     document.getElementById(mesID).appendChild(newElement_name);
     document.getElementById(mesID).appendChild(newElement_text);
     document.getElementById(mesID).appendChild(newElement_date);
+}
+
+// 得知點選的人是誰，來叫出他的個人資料
+function person(name){  
+    var find_name = name; 
+    console.log(find_name);
+    // document.getElementById('profile').style.display = "block";  
+    document.getElementById('profile').classList.add('show_person_profile');
+    document.getElementById('but_hide').style.display = 'none';
+    
+    setTimeout(function(){
+        document.getElementById('Previous-project').setAttribute('onclick','hideprofile()');
+        console.log('wait');    
+    }, 100);
+    
+
+    
+}
+function hideprofile(){
+    document.getElementById('Previous-project').removeAttribute('onclick','hideprofile()');
+    console.log('hide_person');
+
+    document.getElementById('profile').classList.remove('show_person_profile');
+    document.getElementById('but_hide').style.display = 'block';
+    
 }
 
 

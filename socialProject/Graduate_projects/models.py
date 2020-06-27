@@ -9,6 +9,14 @@ class project(models.Model):
     #確認專題檔案是否上傳，預設值為false
     upload = models.BooleanField(default=False)
     #新增file upload
+    group = models.IntegerField(default=0)
+    members = models.CharField(max_length=40, default=None, null=False)
+    Progress_rate = models.IntegerField(default = 0,help_text="Please enter your progress rate") #專題進度
+    text_motive = models.CharField(max_length=1000,default="text",help_text="Please enter your group members username")
+    text_SystemRequirement = models.CharField(max_length=1000,default="text",help_text="Please enter your group system request")
+    private_pj_name = models.BooleanField(default=False)
+    private_text_motive = models.BooleanField(default=False)
+    private_text_system = models.BooleanField(default=False)
     
 class Email(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)

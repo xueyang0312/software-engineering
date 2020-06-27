@@ -57,38 +57,6 @@
    
 
 
-    <div id='profile' style='display: none;'>        
-        <div class='profile-title'>個人資料</div>
-        <div class='profile-content'>
-            <div class='profile-img-flex'>
-                <div>圖片 : </div>
-                <img class='profile_image' id='p_img' src="{% static 'student/images/user.png' %}">
-                <input type="file" class = 'upload-img' onchange="readURL(this)" targetID="p_img" accept="image/gif, image/jpeg, image/png"/ value="upload" style="overflow: hidden">
-            </div>
-
-            <form action="" method="POST" class='profile-text-flex' id='profile-form'>
-                {% csrf_token %}
-                <div class='profile-index'>
-                    姓名 : {{ u_name }}
-                </div>
-                <div class='profile-index'>
-                    手機 : {{ form.userphone }}
-                </div>
-                <div class='profile-index'>
-                    LINE-ID : {{ form.userline }}
-                </div>
-                <div class='profile-index'>
-                    聯絡e-mail : {{ form.contactMail }}
-                </div>
-                <div class='store-button'>
-                    <input type='submit' name='submit' onclick='store()' value='儲存'/>
-                </div>
-                
-            </form>
-        </div>
-        
-        
-    </div>
 
     
     <div id='Previous-project'>
@@ -137,28 +105,28 @@
                     <div class='pj-content' id='pj-members'></div>
                     <div class='pj-content' id='pj-text'></div>
 
-                    <div id='message_board'>
-                            <div class='mes_title'>留言板:</div>
-                            <div class='mes_bar'>
-                                <a class='mes_name'>洋洋羊得意</a>
-                                <div class='mes_text'>你好棒</div>
-                                <div class='mes_date'>2020-6-23 15:20</div>
-                            </div>
+                    <div id='message_board' >
+                        <div class='mes_title'>留言板:</div>
+                        <div class='mes_bar'>
+                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
+                            <div class='mes_text'>你好棒</div>
+                            <div class='mes_date'>2020-6-23 15:20</div>
+                        </div>
 
-                            <div class='mes_bar'>
-                                <a class='mes_name'>洋洋羊得意</a>
-                                <div class='mes_text'>你好棒</div>
-                                <div class='mes_date'>2020-6-23 15:20</div>
-                            </div>
+                        <div class='mes_bar'>
+                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
+                            <div class='mes_text'>你好棒</div>
+                            <div class='mes_date'>2020-6-23 15:20</div>
+                        </div>
 
-                            <div class='mes_bar'>
-                                <a class='mes_name'>洋洋羊得意</a>
-                                <div class='mes_text'>你好棒</div>
-                                <div class='mes_date'>2020-6-23 15:20</div>
-                            </div>
+                        <div class='mes_bar'>
+                            <a href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
+                            <div class='mes_text'>你好棒</div>
+                            <div class='mes_date'>2020-6-23 15:20</div>
+                        </div>
                     </div>
-                        <textarea class='textinput' id='mes_text' cols="112" rows="4">留言...</textarea>
-                        <input id='mesbut' type="button" value="送出" onclick="sendmessage()"/>
+                    <textarea class='textinput' id='input_mes_text' cols="112" rows="4">留言...</textarea>
+                    <input id='mesbut' type="button" value="送出" onclick="sendmessage()"/>
             </div>            
         </div>
         </div>
@@ -205,22 +173,77 @@
             <div class='uploadindex'>
                 
                 <div >檔案 :</div>
-                <input class='fileblock' type="file" name="file" id="loadfile"/> 
-                <br><a href='#' id='showfilename'></a>
+                <input class='fileblock' type="file" accept ='.rar,.zip' method="post" name="file" id="loadfile"/> 
+                <br><a download  id='showfilename'></a> 
+                <!-- ---------------------href="D:\Desktop\ES\text.rar"------上面要改位置 -->
                 <div class='showtime'>
                     <div >上傳時間 : &ensp;</div>
                     <div id='loadtime'></div><br>
                 </div>
-                <input class='uploadbut' type="button" value="upload" onclick="uploadfile()"/> 
+                <input class='uploadbut' type="button" value="upload" onclick="uploadfile()"/>
+            </div>            
+        </div>
+
+        <div class='uploadtext_block'>
+            <div>▶ 專題資料編輯</div>
+            <div class='text_block'>
+                <a class='texttitle'>• 專題名稱 :</a>
+                <input type="checkbox" id="text1" name="private1" value="private">
+                <label for="private"> 不公開</label><br>
+                <input type="text" class='textpjname' id='textvalue_1' value=''>
+                <!-- <textarea class='textinput' cols="80" rows="20">
+                </textarea> -->
                 
+            </div>
+            <div class='text_block'>
+                <a class='texttitle'>• 開發動機 :</a>
+                <input type="checkbox" id="text2" name="private2" value="private"  ><!-- checked="checked" -->
+                <label for="private"> 不公開</label><br>
+                <textarea class='textinput' cols="80" rows="20">輸入你想要寫的內容...
+                </textarea>
                 
-                
+            </div>
+            <div class='text_block'>
+                <a class='texttitle'>• 系統需求 : </a>
+                <input type="checkbox" id="text3" name="private3" value="private"  checked="checked">
+                <label for="private"> 不公開</label><br>
+                <textarea class='textinput' cols="80" rows="20">輸入你想要寫的內容...
+                </textarea>
                 
             </div>
             
+            <input id='savebut' type="button" value="save" onclick="savetext()"/>
         </div>
-        <div class='uploadtext_block'>
-            專題資料編輯
+    </div>
+
+    <div id='profile' style='display: none;'>        
+        <div class='profile-title'>個人資料</div>
+        <div class='profile-content'>
+            <div class='profile-img-flex'>
+                <div>圖片 : </div>
+                <img class='profile_image' id='p_img' src="{% static 'student/images/user.png' %}">
+                <input type="file" class = 'upload-img' onchange="readURL(this)" targetID="p_img" accept="image/gif, image/jpeg, image/png"/ value="upload" style="overflow: hidden">
+            </div>
+
+            <form action="" method="POST" class='profile-text-flex' id='profile-form'>
+                {% csrf_token %}
+                <div class='profile-index'>
+                    姓名 : {{ u_name }}
+                </div>
+                <div class='profile-index'>
+                    手機 : {{ form.userphone }}
+                </div>
+                <div class='profile-index'>
+                    LINE-ID : {{ form.userline }}
+                </div>
+                <div class='profile-index'>
+                    聯絡e-mail : {{ form.contactMail }}
+                </div>
+                <div class='store-button'>
+                    <input type='submit' name='submit' id='but_hide' onclick='store()' value='儲存'/>
+                </div>
+                
+            </form>
         </div>
     </div>
    

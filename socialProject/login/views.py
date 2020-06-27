@@ -21,9 +21,7 @@ def send_meeting():
 def login(request, identity):
     # callback 為重新導向網址
     if identity == "callback":
-        print("in callback")
         idt = request.session['identity']
-        print(idt)
         u_id = request.session['_auth_user_id']
         # 若沒有Profile指向u_id，則建立一個Profile
         try:
@@ -32,6 +30,7 @@ def login(request, identity):
                 p.update(identity=idt)
         except ObjectDoesNotExist:
             Profile.objects.create(user=User.objects.get(id=u_id), identity=idt)
+        request.session.set_expiry(0)
         if idt == "student": # 轉到學生頁面
             return HttpResponseRedirect(reverse('s_index'))
         elif idt == "teacher": # 轉到老師頁面

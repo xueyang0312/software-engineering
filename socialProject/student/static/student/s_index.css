@@ -26,6 +26,8 @@ ul {
     align-items: center;
     width: 8%;
     justify-content: center;
+    
+    
 }
 .project_title{
     display: flex;
@@ -37,37 +39,23 @@ ul {
 
 
 }
-.roledisplay{
-    display: flex;
-    flex-direction: row;
-    width: 250px;
-    height: 250px;
-
-}
-.roledisplay a{
-    margin: 100px;
-    color: white;
-    text-decoration: none;
-}
-.roledisplay img {
-    /* margin: 100px; */
-    width: 200px;
-    height: 200px;
-}
-
 #status{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     margin-right: 2%;
-    width: 15%;
+    width: 20%;
     text-decoration: none;
 }
-#status a{
+#status a{    
     text-decoration: none;
     color: white;
 }
+/* #status .username{
+    
+    width: 60px;
+} */
 .project_image{
     height:50%;
     background-size: cover;
@@ -101,8 +89,7 @@ ul {
 
 #profile{    
     display: flex;
-    flex-direction: column;
-    /* align-content: center; */
+    flex-direction: column;    
     width: 40%;
     margin-left: 30%;
     margin-top: 3%;
@@ -110,6 +97,8 @@ ul {
     border-style: solid;
     /* background-color: aqua; */
     height:500px;
+    z-index: 10;
+    position: relative;
     
 }
 
@@ -221,5 +210,12 @@ ul.table_index ul :hover{
     background-color:blueviolet;
     border-color: rgb(212, 0, 255);
     
+
+}
+.show_person_profile{
+    display: block !important;
+    margin-top: -550px !important;
+    background-color: black;
+    opacity: 0.95;
 
 }

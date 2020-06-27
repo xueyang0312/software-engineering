@@ -6,6 +6,7 @@ function check(status) {
     }
     
 }
+
 function click_dir(choice){
     console.log(choice);
     reductionDirColor();
@@ -17,7 +18,27 @@ function click_dir(choice){
     if (choice=='cur_pj'){
         hideAll();
         document.getElementById('current_pj').style.display = "flex"; //hide 歷屆專題資料
-        
+        $.ajax({
+            url: './index', 
+            async: true,
+            type: "POST",
+            data: { 'group_No': 1, 'operation':'fetch'},
+            datatype: 'json',
+            error: function (xhr, message, errorTrown){
+                console.log(message + errorTrown);
+            },
+            success: function (response){
+                console.log("got json response");
+                $('#group_No_change').text(1);
+                $('#pj_name').text(response["projectname"]);
+                $('#group_teacher').text(response["advisor"]);
+                $('#group_member').html(response["members"]);
+                $('#progress_value').text(response["progress_value"] + "%");
+                $('.gtitle').text(response["projectname"]);
+            }
+        });
+        var value = document.getElementById('progress_value').innerHTML;
+        document.getElementById('progress_bar').style.width = value;
     }
     if (choice=='upload_pj'){
         hideAll();
@@ -40,6 +61,7 @@ function readURL(input){
         reader.readAsDataURL(input.files[0]);  
     }
 }
+
 var username = '翁晟洋'
 var usergrade = 110
 var usermail =''
@@ -164,30 +186,47 @@ function scroll(){
     var hight = document.getElementById('cur_group_block').scrollTop;         
     groupNo = Math.round(hight/600) +1;
     document.getElementById('group_No_change').innerHTML=groupNo;
-    if (groupNo == 2){
-        document.getElementById('pj_name').innerHTML='家有女友';
-        document.getElementById('group_teacher').innerHTML='劉育瑋獸慾';
-        document.getElementById('group_member').innerHTML='F1065511 陽菜<br>D1065511 瑠衣<br>A1065511 流石景<br>A1065511 藤井夏生<br>';
-        document.getElementById('progress_bar').style.width='80%';
-        document.getElementById('progress_value').innerHTML='80%';
-    }
-    else if (groupNo == 3){
-        
-    }
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: { 'group_No': parseInt(groupNo, 10), 'operation':'fetch'},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            console.log("got json response");
+            $('#pj_name').text(response["projectname"]);
+            $('#group_teacher').text(response["advisor"]);
+            $('#group_member').html(response["members"]);
+            $('#progress_value').text(response["progress_value"] + "%");
+            $('.gtitle').text(response["projectname"]);
+        }
+    });
+    var value = document.getElementById('progress_value').innerHTML;
+    document.getElementById('progress_bar').style.width = value;
 }
+
 // 上船專題檔案
 function uploadfile(){
-    var selectedFile = document.getElementById('loadfile').files[0];
-    
-    
+    var selectedFile = document.getElementById('loadfile').files[0];        
     if(selectedFile){
         console.log(selectedFile);
         document.getElementById('loadtime').innerHTML= gettime();
         document.getElementById('showfilename').innerHTML= selectedFile.name;
-        alert('上傳成功!!');
+
+        objectURL = URL.createObjectURL(selectedFile);
+        
+        document.getElementById('showfilename').setAttribute('href',objectURL)
+        var ss = returnFileSize(selectedFile.size);
+        alert('上傳成功 !\n ' + ss);  
+        
+      
+        
     }
     else{
-        alert('選檔案啦，媽的智障是不是');
+        alert('warning : 選擇上傳選檔案');
     }
     // console.log(selectedFile);
     
@@ -195,11 +234,13 @@ function uploadfile(){
 
 function savetext(){
     var c = document.getElementById('text1').checked;
+
     console.log(c);
 }
 var mescount = 1;
+
 function sendmessage(){
-    var mes = document.getElementById('mes_text').value;
+    var mes = document.getElementById('input_mes_text').value;
     console.log(mes);
     createNewMessage(mes,mescount);
     mescount += 1;
@@ -214,6 +255,10 @@ function createNewMessage(text, ID){
     newElement.className = 'mes_bar';
     newElement.setAttribute('id',mesID);
     newElement_name.className = 'mes_name';
+    newElement_name.setAttribute('onclick','person(this.id)');
+    newElement_name.setAttribute('href','#');
+    newElement_name.setAttribute('value',username);
+    newElement_name.setAttribute('id',username);
     newElement_text.className = 'mes_text';
     newElement_date.className = 'mes_date';
     var newName = document.createTextNode(username);
@@ -228,3 +273,52 @@ function createNewMessage(text, ID){
     document.getElementById(mesID).appendChild(newElement_date);
 }
 
+// 得知點選的人是誰，來叫出他的個人資料
+function person(name){  
+    var find_name = name; 
+    console.log(find_name);
+    // document.getElementById('profile').style.display = "block";  
+    document.getElementById('profile').classList.add('show_person_profile');
+    document.getElementById('but_hide').style.display = 'none';
+    
+    setTimeout(function(){
+        document.getElementById('Previous-project').setAttribute('onclick','hideprofile()');
+        console.log('wait');    
+    }, 100);
+    
+
+    
+}
+function hideprofile(){
+    document.getElementById('Previous-project').removeAttribute('onclick','hideprofile()');
+    console.log('hide_person');
+
+    document.getElementById('profile').classList.remove('show_person_profile');
+    document.getElementById('but_hide').style.display = 'block';
+    
+}
+function returnFileSize(number) {
+    if(number < 1024) {
+      return number + ' bytes';
+    } else if(number >= 1024 && number < 1048576) {
+      return (number/1024).toFixed(1) + ' KB';
+    } else if(number >= 1048576) {
+      return (number/1048576).toFixed(1) + ' MB';
+    }
+  }
+
+function WriteToFile(text) {
+   
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+
+    var fileFrom =document.getElementById("fileFrom").value;
+    var fileTo =document.getElementById("fileTo").value;
+    var file="Data"+fileFrom+"0000-"+fileTo+"0000.txt";
+    var folder ="/text";
+    var f=folder+file;
+
+    var s = fso.CreateTextFile(f, true);
+    s.WriteLine('<?xml version="1.0″ encoding="utf-8″ ?>');
+    s.WriteLine(text);
+    s.Close();
+ }

@@ -16,3 +16,13 @@ class Record(models.Model):
     sentence = models.CharField(max_length=100)
     time = models.DateTimeField(default=datetime.now)
     group = models.IntegerField(default=0)
+
+class FreeTime(models.Model):
+    start = models.DateTimeField(blank=False)
+    end = models.DateTimeField(blank=False)
+    group = models.IntegerField(default=0)
+
+class MeetTime(models.Model):
+    start = models.DateTimeField(blank=False)
+    end = models.DateTimeField(blank=False)
+    group = models.IntegerField(default=0)

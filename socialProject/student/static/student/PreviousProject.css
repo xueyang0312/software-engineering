@@ -1,5 +1,8 @@
 #Previous-project{
     display: flex;
+    z-index: 0;
+
+
     
 }
 .Previous-pjlist{
@@ -47,7 +50,7 @@
 #Previous-pjshow-block{
     height: 600px;
     width: 85%;
-    
+    z-index: 0;
     /* background-color: beige; */
 }
 .pj-title{
@@ -79,16 +82,17 @@
 }
 #pj-text{
     width: 100%;
-    height: 1000px;
+    /* height: 1000px; */
     background-color: rgb(15, 12, 12);
     
 }
-
 #message_board{
     margin-top: 200px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    z-index: 3;
+    position: relative;
     
 }
 .mes_title{
@@ -101,10 +105,19 @@
     background-color:#181818;
     width: 80%;
     margin: 0.5%;
+    z-index: 2;
+    position: relative;
     /* border-bottom: 2px white solid; */
 }
 .mes_name{
     margin-left: 2%;
+    color: white;
+    text-decoration: none;
+}
+.mes_name:hover{
+    
+    color: blue;
+    
 }
 .mes_text{
     margin-left: 12%;
@@ -115,9 +128,10 @@
     font-size: smaller;
     margin-bottom: 5px;
 }
-#mes_text{
+#input_mes_text{
     margin-left: 10%;
 }
+
 /* ---------------------應屆專題 */
 #current_pj{
     display: flex;
@@ -145,6 +159,7 @@
     background-color: #282828;
     padding-top: 0.2%; 
     display: flex;
+    flex-direction: column;
     
 }
 
@@ -209,8 +224,8 @@
 .uploadtext_block{
     margin-top: 5%;
     background-color: black;
-    
-    height: 1000px;
+    /* --------------------------調整輸入內文框框大小 */
+    height: 900px;   
     width: 60%;
 }
 .uploadtitle{
@@ -270,3 +285,37 @@
 .uploadbut{
     margin-left: 200px;
 }
+/* 專題資料輸入 */
+.text_block{
+    margin: 10px;
+    margin-left: 50px;
+
+}
+.textinput{
+    margin: 5px;
+    margin-left: 20px;
+    background-color: #282828;
+   
+    
+}
+.text_block input{
+    margin-left: 50px;
+    color: white;
+}
+.uploadtext_block{
+    padding: 10px;
+}
+#savebut{
+    
+    margin-left: 80%;
+    
+}
+.textpjname{
+    background-color: #282828;
+    color: white;
+}
+
+textarea{
+    color: white;
+}
+

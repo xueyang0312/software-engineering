@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from .models import PreProject, Record
+from .models import PreProject, Record, FreeTime, MeetTime
 from .forms import ProfileForm, RecordForm
 from login.models import Profile
 import json
+from datetime import datetime
 
 # use to serialize PreProject object
 def serializePreProject(self):
@@ -57,7 +58,17 @@ def redirect(request):
     return HttpResponse("ya")
 
 def calendar(request):
-    
+    # 存有空的時間
+    FREETIMEFORMAT = "%Y-%m-%d %H:%M" # 儲存freeTime的格式
+    if request.is_ajax():
+        s = request.POST.get('start')
+        e = request.POST.get('end')
+        group = request.POST.get('group')
+        ftime = FreeTime()
+        ftime.start = datetime.strptime(s, FREETIMEFORMAT)
+        ftime.end = datetime.strptime(e, FREETIMEFORMAT)
+        ftime.group = group
+        ftime.save()
     return render(request, "advisor/calendar.html")
 
 def chat(request):
