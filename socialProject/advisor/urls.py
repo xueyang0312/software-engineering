@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path('index', views.index, name="t_index"),
-    path('ajax', views.redirect),
     path('calendar', views.calendar, name="calendar"),
     path('chat', views.chat, name="chat"),
 ]

@@ -171,3 +171,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'graduateproject0857@gmail.com'
 EMAIL_HOST_PASSWORD = 'software0857'
 DEFAULT_FROM_EMAIL = '畢業專題管理系統管理員 <graduateproject0857@gmail.com>'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/pj_media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'pj_media')

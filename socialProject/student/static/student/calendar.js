@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   calendar.render();
+  // intialize the calendar
   $.ajax({
     url: './calendar', 
     async: true,

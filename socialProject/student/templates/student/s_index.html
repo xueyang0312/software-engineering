@@ -28,7 +28,7 @@
         <div clsss='project_title'>畢業專題管理系統</div>
         <div id='status'>
             <img id='status_index' class='status_image' onclick="check('profile')" src="{% static 'student/images/user.png' %}">
-            <a href="#" id='status_index' class="username" onclick="check('profile')">{{ u_name }}</a>
+            <a href="#" id='u_name' class="username" onclick="check('profile')">{{ u_name }}</a>
             <a  href="#" id='status_index' class='identity' onclick="check('student')">{{ idt }}</a>
             <img href="#" id='status_index' class='status_image' onclick="check('bell')" src="{% static 'student/images/bell.png' %}">
             <a href="#" id='status_index' class='account_status' onclick="check('logout')">登出</a>
@@ -51,8 +51,9 @@
             </li> 
         </ul>
         <div class='table_index' onclick="click_dir(this.id)" id='cur_pj'><a href="#">應屆專題</a></div>
-        <div class='table_index' onclick="click_dir(this.id)" id='calendar'><a href="#">上傳檔案</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='upload_pj'><a href="#">上傳檔案</a></div>
         <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聊天室</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='calendar'><a href="#">行事曆</a></div>
     </div>
    
 
@@ -105,26 +106,7 @@
                     <div class='pj-content' id='pj-members'></div>
                     <div class='pj-content' id='pj-text'></div>
 
-                    <div id='message_board' >
-                        <div class='mes_title'>留言板:</div>
-                        <div class='mes_bar'>
-                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-
-                        <div class='mes_bar'>
-                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-
-                        <div class='mes_bar'>
-                            <a href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-                    </div>
+                    <div id='message_board' ></div>
                     <textarea class='textinput' id='input_mes_text' cols="112" rows="4">留言...</textarea>
                     <input id='mesbut' type="button" value="送出" onclick="sendmessage()"/>
             </div>            
@@ -154,34 +136,48 @@
 
         <div id='cur_group_block'>
             <div class='cur_group'>                
-                <div class='gtitle'>
-                    天源突破<br>
-                </div>
-                <div class='gcontent'>
-                    內容:
-                </div>
+                <div class='gtitle'><br></div>
+                <div class='text_motive_content'></div>
+                <div class='text_system_content'></div>
             </div>
-            <div class='cur_group'></div>
-            <div class='cur_group'></div>
-
+            <div class='cur_group'>                
+                <div class='gtitle'><br></div>
+                <div class='text_motive_content'></div>
+                <div class='text_system_content'></div>
+            </div>
+            <div class='cur_group'>                
+                <div class='gtitle'><br></div>
+                <div class='text_motive_content'></div>
+                <div class='text_system_content'></div>
+            </div>
+            <div class='cur_group'>                
+                <div class='gtitle'><br></div>
+                <div class='text_motive_content'></div>
+                <div class='text_system_content'></div>
+            </div>
         </div>
     </div>
-
-    <div id='upload_block'>
+        <div id='upload_block'>
         <div class='uploadfile_block'>
             <div class='uploadtitle'>上傳專題檔案</div>
-            <div class='uploadindex'>
-                
+
+            <form action="" class='uploadindex' method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div >檔案 :</div>
-                <input class='fileblock' type="file" accept ='.rar,.zip' method="post" name="file" id="loadfile"/> 
-                <br><a download  id='showfilename'></a> 
-                <!-- ---------------------href="D:\Desktop\ES\text.rar"------上面要改位置 -->
+                <input type="file" accept ='.rar,.zip' class='fileblock' id="loadfile"/ name="file"> 
+                {% if uploaded_file_url %}
+                <br><a download href="{{ uploaded_file_url }}" id='showfilename' style="color: yellow;">{{ uploaded_file }}</a> 
+                {% endif %}
                 <div class='showtime'>
                     <div >上傳時間 : &ensp;</div>
-                    <div id='loadtime'></div><br>
+                    <div id='loadtime'>{{ uploaded_time }}</div><br>
                 </div>
-                <input class='uploadbut' type="button" value="upload" onclick="uploadfile()"/>
-            </div>            
+                
+                
+                
+                <input class='uploadbut' type="submit" value="upload" onclick="uploadfile()"/>
+            </form>            
+
         </div>
 
         <div class='uploadtext_block'>
@@ -190,32 +186,34 @@
                 <a class='texttitle'>• 專題名稱 :</a>
                 <input type="checkbox" id="text1" name="private1" value="private">
                 <label for="private"> 不公開</label><br>
-                <input type="text" class='textpjname' id='textvalue_1' value=''>
-                <!-- <textarea class='textinput' cols="80" rows="20">
-                </textarea> -->
-                
+                <input type="text" class='textpjname' id='textvalue_1' value=''>                
             </div>
             <div class='text_block'>
                 <a class='texttitle'>• 開發動機 :</a>
                 <input type="checkbox" id="text2" name="private2" value="private"  ><!-- checked="checked" -->
                 <label for="private"> 不公開</label><br>
-                <textarea class='textinput' cols="80" rows="20">輸入你想要寫的內容...
+                <textarea class='textinput' id="text2_input" cols="80" rows="20">輸入你想要寫的內容...
                 </textarea>
-                
             </div>
             <div class='text_block'>
                 <a class='texttitle'>• 系統需求 : </a>
                 <input type="checkbox" id="text3" name="private3" value="private"  checked="checked">
                 <label for="private"> 不公開</label><br>
-                <textarea class='textinput' cols="80" rows="20">輸入你想要寫的內容...
+                <textarea class='textinput' id="text3_input" cols="80" rows="20">輸入你想要寫的內容...
                 </textarea>
+            </div>
+            <div class='text_block'>
+                <a class='texttitle'>• 完成度 : </a>
+    
+                <input type="text" id='text_rate' value='90' style="background-color: #282828;">
                 
             </div>
+            
             
             <input id='savebut' type="button" value="save" onclick="savetext()"/>
         </div>
     </div>
-
+   
     <div id='profile' style='display: none;'>        
         <div class='profile-title'>個人資料</div>
         <div class='profile-content'>

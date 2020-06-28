@@ -11,8 +11,13 @@
     <link rel="icon" type="image/png" href="{% static 'images/presentation.png' %}" sizes="32x32" />
     <link rel="stylesheet" href="{% static 't_index.css' %}"/>
     <link rel="stylesheet" href="{% static 'PreviousProject.css' %}"/>
+    <link rel="stylesheet" href="{% static 'score.css'%}" rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1/jquery-ui.structure.min.css' %}" rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1/jquery-ui.theme.min.css' %}" rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1/jquery-ui.min.css' %}" rel='stylesheet' />
     <script src="{% static 'jquery-3.5.1.js'%}"></script>
     <script src="{% static 'index.js' %}" defer></script>
+    <script src="{% static 'jquery-ui-1.12.1/jquery-ui.min.js' %}" defer></script>
     <script>
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
@@ -28,7 +33,7 @@
         <div clsss='project_title'>畢業專題管理系統</div>
         <div id='status'>
             <img id='status_index' class='status_image' onclick="check('profile')" src="{% static 'images/t_user.png' %}">
-            <a href="#" id='status_index' class="username" onclick="check('profile')">{{ u_name }}</a>
+            <a href="#" id='u_name' class="username" onclick="check('profile')">{{ u_name }}</a>
             <a  href="#" id='status_index' class='identity' onclick="check('student')">{{ idt }}</a>
             <img href="#" id='status_index' class='status_image' onclick="check('bell')" src="{% static 'images/t_bell.png' %}">
             <a href="#" id='status_index' class='account_status' onclick="check('logout')">登出</a>
@@ -53,10 +58,52 @@
         <div class='table_index' onclick="click_dir(this.id)" id='cur_pj'><a href="#">應屆專題</a></div>
         <div class='table_index' onclick="click_dir(this.id)" id='calendar'><a href="#">行事曆</a></div>
         <div class='table_index' onclick="click_dir(this.id)" id='conne_teacher'><a href="#">聊天室</a></div>
+        <div class='table_index' onclick="click_dir(this.id)" id='judge' style="display:none"><a href="#">評分專題</a></div>
     </div>
-    <form action="" method="POST">
-    
    
+   <div class="promptDiv" style="display:none">
+        <div>口頭報告與demo各占40%,60%</div>
+        <div>demo以完成度，新穎性，實用性三個面向進行評分，即三部分各占20%</div>
+    </div>
+    <div class="score" style="display:none">
+        <div class="scoreleft">
+            <div class="sliderDiv">
+                <div class="opacity_degree">
+                    <div>口頭報告 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="opacity"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="red_degree">
+                    <div>作品完成度 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="red"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="green_degree">
+                    <div>作品新穎性 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="green"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="blue_degree">
+                    <div>作品實用性 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="blue"></div>
+            </div>
+        </div>
+        <div class="scoreright">
+            <div id="prompt">?</div>
+            <div id="swatch" class="ui-widget-content ui-corner-all">
+                <p>提交</p>
+            </div>
+            <!-- <div class="sub"></div> -->
+        </div>
+    </div>
     
     <div id='Previous-project'>
         <!-- 專題列表 -->
@@ -104,26 +151,7 @@
                     <div class='pj-content' id='pj-members'></div>
                     <div class='pj-content' id='pj-text'></div>
 
-                    <div id='message_board' >
-                        <div class='mes_title'>留言板:</div>
-                        <div class='mes_bar'>
-                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-
-                        <div class='mes_bar'>
-                            <a  href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-
-                        <div class='mes_bar'>
-                            <a href = '#' class='mes_name' onclick="person('this')">洋洋羊得意</a>
-                            <div class='mes_text'>你好棒</div>
-                            <div class='mes_date'>2020-6-23 15:20</div>
-                        </div>
-                    </div>
+                    <div id='message_board' ></div>
                     <textarea class='textinput' id='input_mes_text' cols="112" rows="4">留言...</textarea>
                     <input id='mesbut' type="button" value="送出" onclick="sendmessage()"/>
             </div>            

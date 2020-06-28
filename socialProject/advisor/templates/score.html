@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPMS 畢業專題管理系統</title>
+    <!-- <link rel="icon" type="image/png" href="{% static 'images/presentation.png' %}" sizes="32x32" /> -->
+    <link rel="stylesheet" href="score.css" rel='stylesheet' />
+    <link rel="stylesheet" href="jquery-ui.structure.min.css" rel='stylesheet' />
+    <link rel="stylesheet" href="jquery-ui.theme.min.css" rel='stylesheet' />
+    <link rel="stylesheet" href="jquery-ui.min.css" rel='stylesheet' />
+    <!-- <link rel="stylesheet" href="{% static 'calendar.css' %}" rel='stylesheet' /> -->
+    <script src="jquery-3.5.1.js" defer></script>
+    <script src="jquery-ui.min.js" defer></script>
+
+    <script src="score.js" defer></script>
+</head>
+
+<body>
+    <div class="promptDiv">
+        <div>口頭報告與demo各占40%,60%</div>
+        <div>demo以完成度，新穎性，實用性三個面向進行評分，即三部分各占20%</div>
+    </div>
+    <div class="score">
+        <div class="scoreleft">
+            <div class="sliderDiv">
+                <div class="opacity_degree">
+                    <div>口頭報告 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="opacity"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="red_degree">
+                    <div>作品完成度 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="red"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="green_degree">
+                    <div>作品新穎性 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="green"></div>
+            </div>
+            <div class="sliderDiv">
+                <div class="blue_degree">
+                    <div>作品實用性 :</div>
+                    <div class="value"></div>
+                </div>
+                <div id="blue"></div>
+            </div>
+        </div>
+        <div class="scoreright">
+            <div id="prompt">?</div>
+            <div id="swatch" class="ui-widget-content ui-corner-all">
+                <p>提交</p>
+            </div>
+            <!-- <div class="sub"></div> -->
+        </div>
+    </div>
+ 
+</body>
+
+</html>

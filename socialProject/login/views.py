@@ -30,7 +30,6 @@ def login(request, identity):
                 p.update(identity=idt)
         except ObjectDoesNotExist:
             Profile.objects.create(user=User.objects.get(id=u_id), identity=idt)
-        request.session.set_expiry(0)
         if idt == "student": # 轉到學生頁面
             return HttpResponseRedirect(reverse('s_index'))
         elif idt == "teacher": # 轉到老師頁面

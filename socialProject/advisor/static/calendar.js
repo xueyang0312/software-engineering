@@ -59,7 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
       $(".upper").html('Delete event')
       $("#titol").val(currentE.title)
       // $(".subDiv .update").show()
-      $(".subDiv .delete").show()
+      // $(".subDiv .delete").show()
+      if (info.event.backgroundColor == "red"){
+        $(".subDiv .delete").show()
+      }
       $("#options").show()
       // change the border color just for fun
       info.el.style.borderColor = 'red';
@@ -145,4 +148,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   calendar.render();
+  // intialize the calendar
+  $.ajax({
+    url: './calendar', 
+    async: true,
+    type: "POST",
+    data: {'operation': 'fetchTime'},
+    datatype: 'json',
+    error: function (xhr, message, errorTrown){
+        console.log(message + errorTrown);
+    },
+    success: function (response){
+        results = JSON.parse(response);
+        for (i in results){
+          calendar.addEvent(results[i])
+        }
+    }
+  });
 });

@@ -48,6 +48,10 @@ function click_dir(choice){
         hideAll();
         document.location.href = "./chat"
     }
+    if(choice=='calendar'){
+        hideAll();
+        document.location.href = "./calendar"
+    }
 }
 // 讀取照片並且更換大頭貼
 function readURL(input){    
@@ -62,13 +66,14 @@ function readURL(input){
     }
 }
 
-var username = '翁晟洋'
+var username = $("#u_name").text()
 var usergrade = 110
 var usermail =''
 var userphone =''
 var userline =''
 var choiceYear = '108'
 var choiceGroup = '1'
+var pj_groupNo = 1;
 //從資料庫讀取先前的資料，秀在html上
 ///.........
 //讀取使用者修改的資料
@@ -106,7 +111,7 @@ function choice_Y(status) { //選擇年分
         url: './index', 
         async: true,
         type: "POST",
-        data: {'year': choiceYear + '級', 'group': 1},
+        data: {'year': choiceYear + '級', 'group': 1, 'operation': 'pj'},
         datatype: 'json',
         error: function (xhr, message, errorTrown){
             console.log(message + errorTrown);
@@ -118,6 +123,27 @@ function choice_Y(status) { //選擇年分
             $('#pj-teacher').text("• 指導教授 : " + response["advisor"]);
             $('#pj-members').text("• 組員 : " + response["members"]);
             $('#pj-text').text("• 內容 : " + response["content"]);
+        }
+    });
+
+    // 利用ajax獲取專題留言板資訊
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: {'year': choiceYear + '級', 'group': 1, 'operation': 'mes'},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            $('#message_board').html("<div class='mes_title'>留言板:</div>")
+            var results = JSON.parse(response);
+            for (i in results){
+                $("#message_board").append(
+                    "<div class='mes_bar'><a id='" + results[i]["username"] + "' href='#' onclick=\"person(this.id)\" class='mes_name'>" + results[i]["username"] + "</a><div class='mes_text'>" + results[i]["sentence"] + "</div><div class='mes_date'>" + results[i]["time"] +"</div></div>"
+                    );
+            }
         }
     });
 }
@@ -135,7 +161,7 @@ function choice_G(status) {  //選擇組別
         url: './index', 
         async: true,
         type: "POST",
-        data: {'year': choiceYear + '級', 'group': parseInt(choiceGroup, 10)},
+        data: {'year': choiceYear + '級', 'group': parseInt(choiceGroup, 10), 'operation': 'pj'},
         datatype: 'json',
         error: function (xhr, message, errorTrown){
             console.log(message + errorTrown);
@@ -146,6 +172,26 @@ function choice_G(status) {  //選擇組別
             $('#pj-teacher').text("• 指導教授 : " + response["advisor"]);
             $('#pj-members').text("• 組員 : " + response["members"]);
             $('#pj-text').text("• 內容 : " + response["content"]);
+        }
+    });
+
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: {'year': choiceYear + '級', 'group': choiceGroup, 'operation': 'mes'},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            $('#message_board').html("<div class='mes_title'>留言板:</div>")
+            var results = JSON.parse(response);
+            for (i in results){
+                $("#message_board").append(
+                    "<div class='mes_bar'><a id='" + results[i]["username"] + "' href='#' onclick=\"person(this.id)\" class='mes_name'>" + results[i]["username"] + "</a><div class='mes_text'>" + results[i]["sentence"] + "</div><div class='mes_date'>" + results[i]["time"] +"</div></div>"
+                    );
+            }
         }
     });
 }
@@ -172,7 +218,8 @@ function hideAll(){
 }
 function gettime(){
     var t = new Date();
-    var currentTime = t.getFullYear()+'-'+t.getMonth()+'-'+t.getDate()+'  '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
+    var month = t.getMonth() + 1;
+    var currentTime = t.getFullYear()+'-'+month+'-'+t.getDate()+'  '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
     return currentTime;
     console.log(currentTime);
 }
@@ -196,12 +243,14 @@ function scroll(){
             console.log(message + errorTrown);
         },
         success: function (response){
-            console.log("got json response");
+            console.log(response);
             $('#pj_name').text(response["projectname"]);
             $('#group_teacher').text(response["advisor"]);
             $('#group_member').html(response["members"]);
             $('#progress_value').text(response["progress_value"] + "%");
             $('.gtitle').text(response["projectname"]);
+            $('.text_motive_content').text('開發動機 ：'+response["pj_text_motive"]);
+            $('.text_system_content').text('系統需求 ：'+response["pj_text_system"]);
         }
     });
     var value = document.getElementById('progress_value').innerHTML;
@@ -213,12 +262,12 @@ function uploadfile(){
     var selectedFile = document.getElementById('loadfile').files[0];        
     if(selectedFile){
         console.log(selectedFile);
-        document.getElementById('loadtime').innerHTML= gettime();
+        // document.getElementById('loadtime').innerHTML= gettime();
         document.getElementById('showfilename').innerHTML= selectedFile.name;
 
-        objectURL = URL.createObjectURL(selectedFile);
+        // objectURL = URL.createObjectURL(selectedFile);
         
-        document.getElementById('showfilename').setAttribute('href',objectURL)
+        // document.getElementById('showfilename').setAttribute('href',objectURL)
         var ss = returnFileSize(selectedFile.size);
         alert('上傳成功 !\n ' + ss);  
         
@@ -232,10 +281,36 @@ function uploadfile(){
     
 }
 
-function savetext(){
-    var c = document.getElementById('text1').checked;
-
-    console.log(c);
+function savetext(){    
+    var pj_name = document.getElementById('textvalue_1').value;
+    var pj_Progress_rate = document.getElementById('text_rate').value;
+    var pj_text_motive = document.getElementById('text2_input').value;
+    var pj_text_system = document.getElementById('text3_input').value;
+    var private_pj_name = Number(document.getElementById('text1').checked);
+    var private_text_motive = Number(document.getElementById('text2').checked);
+    var private_text_system = Number(document.getElementById('text3').checked);
+    console.log(private_pj_name);
+    $.ajax({
+        url: './index',
+        async: true,
+        type: "POST",
+    data: {'pj_groupNo' :pj_groupNo,
+           'pj_name': pj_name, 
+           'pj_Progress_rate': parseInt(pj_Progress_rate, 10),
+           'pj_text_motive': pj_text_motive, 
+           'pj_text_system': pj_text_system, 
+           'private_pj_name': private_pj_name, 
+           'private_text_motive': private_text_motive, 
+           'private_text_system': private_text_system, 
+           'operation':'storepj'},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            console.log(response);
+        }
+    });
 }
 var mescount = 1;
 
@@ -244,6 +319,20 @@ function sendmessage(){
     console.log(mes);
     createNewMessage(mes,mescount);
     mescount += 1;
+
+    $.ajax({
+        url: './index', //請求的網址
+        async: true,
+        type: "POST",
+        data: {'username': username, 'sentence':mes, 'year': choiceYear+'級', 'group':choiceGroup, 'operation': 'sendmes'},
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            
+        }
+    });
 }
 
 function createNewMessage(text, ID){
@@ -277,7 +366,22 @@ function createNewMessage(text, ID){
 function person(name){  
     var find_name = name; 
     console.log(find_name);
-    // document.getElementById('profile').style.display = "block";  
+    $.ajax({
+        url: './index', 
+        async: true,
+        type: "POST",
+        data: {'name': find_name, 'operation': 'getuser' },
+        datatype: 'json',
+        error: function (xhr, message, errorTrown){
+            console.log(message + errorTrown);
+        },
+        success: function (response){
+            console.log(response);
+            $('#id_userphone').val(response["userphone"]);
+            $('#id_userline').val(response["userline"]);
+            $('#id_contactMail').val(response["contactMail"]);
+        }
+    });
     document.getElementById('profile').classList.add('show_person_profile');
     document.getElementById('but_hide').style.display = 'none';
     

@@ -12,7 +12,7 @@ function Update(){ //更新網頁
         },
         success: function (response){
             $("#chat_space").html("") //印之前先清空
-            results = JSON.parse(response)
+            var results = JSON.parse(response)
             for(i in results){
                 $("#chat_space").append(
                     "<div class='mes_bar'><a class='mes_name'>" + results[i]["username"] + "</a><div class='mes_text'>" + results[i]["sentence"] + "</div><div class='mes_date'>" + results[i]["time"] +"</div></div>"
