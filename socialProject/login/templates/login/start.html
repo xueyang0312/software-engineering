@@ -2,11 +2,11 @@
 {% block title %} GPMS role {% endblock %}
 {% block content %} 
 {% load static %}
-
 <h2> 請先選擇角色 </h2>
-    <a href="login/teacher"><img src="{% static 'images/teacher.png' %}"></a><br>
-    <a href="login/student"><img src="{% static 'images/graduate.png' %}"></a><br>
-    <a href="login/guest"><img src="{% static 'images/general.png' %}"></a><br>
-
+<div class="roledisplay">
+    <a href="login">老師登入<img src="{% static 'images/teacher.png' %}"></a><br>
+    <a href="login">學生登入<img src="{% static 'images/graduate.png' %}"></a><br>
+    <a href="login">訪客登入<img src="{% static 'images/general.png' %}"></a><br>
+</div>
 
 {% endblock %}
